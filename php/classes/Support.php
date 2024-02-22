@@ -2,7 +2,7 @@
 
 class Support extends Character {
     public function __construct($name) {
-        parent::__construct($name, 80, 5, 8);
+        parent::__construct($name, 80, 5, "Mercurochrome","+20", 8);
         $this->specialCooldownMax = 4;
     }
 

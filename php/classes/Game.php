@@ -9,16 +9,14 @@ class Player {
         $this->name = $name;
     }
 
-    public function addCharacter(Character $character) {
-        $this->characters[] = $character;
-    }
-
+    // choisir le perso
     public function chooseCharacter($index) {
         if (isset($this->characters[$index])) {
             $this->currentCharacterIndex = $index;
         }
     }
 
+    // permet de récupérer les informations du perso et de les lier au joueur
     public function getCurrentCharacter() {
         if (isset($this->characters[$this->currentCharacterIndex])) {
             return $this->characters[$this->currentCharacterIndex];
@@ -26,11 +24,13 @@ class Player {
         return null; 
     }
 
+    // Permet d'infliger des changements
     public function setCharacter(Character $character) {
         $this->characters[0] = $character;
         $this->currentCharacterIndex = 0;
     }
 
+    // Permet de réinitialiser le perso à la fin de partie
     public function resetCharacters() {
         $this->currentCharacterIndex = 0;
     }
@@ -43,6 +43,7 @@ class Player {
 class Game {
     private $player1;
     private $player2;
+    //On commence au tour 1
     private $currentTurn = 1;
 
     public function __construct(Player $player1, Player $player2) {
@@ -50,6 +51,7 @@ class Game {
         $this->player2 = $player2;
     }
 
+    //Déroulement d'un tour
     public function playTurn($attackType) {
         $activePlayer = $this->currentTurn % 2 === 0 ? $this->player2 : $this->player1;
         $waitingPlayer = $this->currentTurn % 2 === 0 ? $this->player1 : $this->player2;
@@ -57,38 +59,48 @@ class Game {
         $activeCharacter = $activePlayer->getCurrentCharacter();
         $waitingCharacter = $waitingPlayer->getCurrentCharacter();
 
-        if ($attackType === 'basic') {
+        //Gérer les attaques
+        if ($attackType === 'Attaque basique') {
             $activeCharacter->basicAttack($waitingCharacter);
-        } elseif ($attackType === 'special' && $activeCharacter->canPerformSpecialAttack()) {
+        } elseif ($attackType === 'Attaque spéciale' && $activeCharacter->canPerformSpecialAttack()) {
             $activeCharacter->specialAttack($waitingCharacter);
         }
 
+        //Réduit les cooldowns pour les comps spés
         $activeCharacter->reduceCooldown();
 
         $this->currentTurn++;
     }
 
+    //Vérification du Game Over
     public function checkGameOver() {
-        if ($this->player1->getCurrentCharacter()->getHealth() <= 0) {
-            return $this->player2; // Le joueur 2 gagne
-        } elseif ($this->player2->getCurrentCharacter()->getHealth() <= 0) {
-            return $this->player1; // Le joueur 1 gagne
+        $player1Character = $this->player1->getCurrentCharacter();
+        $player2Character = $this->player2->getCurrentCharacter();
+        
+        // Si l'un des deux joueurs est à 0, l'autre joueur gagne. 
+        if ($player1Character && $player2Character) {
+            if ($player1Character->getHealth() <= 0) {
+                return $this->player2;
+            } elseif ($player2Character->getHealth() <= 0) {
+                return $this->player1;
+            }
         }
-        return false; // Le jeu continue
+
+        // La partie continue
+        return false; 
     }
 
+    // On recommence la partie
     public function reset() {
         $this->player1->resetCharacters();
         $this->player2->resetCharacters();
         $this->currentTurn = 1;
     }
 
-    // Méthode pour obtenir le joueur 1
     public function getPlayer1() {
         return $this->player1;
     }
 
-    // Méthode pour obtenir le joueur 2
     public function getPlayer2() {
         return $this->player2;
     }

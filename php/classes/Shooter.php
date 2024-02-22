@@ -2,7 +2,7 @@
 
 class Shooter extends Character {
     public function __construct($name) {
-        parent::__construct($name, 90, 20, 4);
+        parent::__construct($name, 90, 20, "Démocratie", 40, 4);
         $this->specialCooldownMax = 3;
     }
 

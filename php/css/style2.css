@@ -74,12 +74,13 @@ form {
 }
 
 label {
-    margin-right: 10px;
+    margin: 10px;
 }
 
 input[type="text"], input[type="password"], select {
     padding: 10px;
     margin-bottom: 20px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     width: calc(100% - 22px);
 }
@@ -90,6 +91,7 @@ input[type="submit"] {
     border: none;
     color: white;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 input[type="submit"]:hover {
@@ -110,24 +112,15 @@ button:hover {
 }
 
 .personnage {
-    text-align: center; /* Centre le contenu du personnage */
-    margin-bottom: 20px; /* Espacement sous chaque personnage */
-}
-
-.personnage img {
-    width: 100px; /* Taille uniforme pour les images */
-    height: 100px; /* Taille uniforme pour les images */
-    object-fit: contain; /* Garantit que les images s'adaptent sans être déformées */
-    border-radius: 50%; /* Rend les images rondes, optionnel */
-    display: block; /* Assure que l'image est traitée comme un bloc pour le centrage */
-    margin: 0 auto 10px; /* Centre l'image horizontalement et ajoute de l'espace en dessous */
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 .actions {
-    text-align: center; /* Centre les boutons sous les images */
+    text-align: center; 
 }
 
 .actions button {
-    margin: 5px; /* Espacement autour des boutons */
-    display: inline-block; /* Affiche les boutons côte à côte */
+    margin: 5px; 
+    display: inline-block; 
 }

@@ -2,7 +2,7 @@
 
 class Mage extends Character {
     public function __construct($name) {
-        parent::__construct($name, 100, 15, 5);
+        parent::__construct($name, 100, 15, "Armagédon", 30, 5);
         $this->specialCooldownMax = 3;
     }
 
