@@ -1,12 +1,20 @@
 <?php
 session_start();
 
-require_once 'tools/selection.php';
+// Gérer la bataille
+require_once 'tools/battle.php';
+//Gérer l'interface de jeu
+require_once 'tools/interface.php';
+
+// Classe parent
 require_once 'classes/Character.php';
+// Classes enfants 
 require_once 'classes/Mage.php';
 require_once 'classes/Fighter.php';
 require_once 'classes/Support.php';
 require_once 'classes/Shooter.php';
+
+// Gérer la game
 require_once 'classes/Game.php';
 
 ?>
